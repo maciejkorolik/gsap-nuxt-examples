@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <Header />
-    <div class="container mx-auto pt-12">
+    <div class="container mx-auto">
       <Nuxt />
     </div>
   </div>
@@ -11,4 +11,8 @@
 export default {}
 </script>
 
-<style></style>
+<style>
+body {
+  overflow-x: hidden;
+}
+</style>

@@ -5,6 +5,10 @@ module.exports = {
   },
   purge: [],
   theme: {
+    fontFamily: {
+      sans: ['Questrial', 'system-ui'],
+      mono: ['Inconsolata', 'monospace'],
+    },
     extend: {},
   },
   variants: {},

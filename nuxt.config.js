@@ -13,7 +13,14 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        href:
+          'https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Questrial:wght@400&display=swap',
+        rel: 'stylesheet',
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
