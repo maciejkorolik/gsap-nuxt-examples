@@ -1,23 +1,12 @@
 <template>
-  <div class="container">
-    <div>
-      <h1 class="title">Vue transitions</h1>
+  <section class="pt-24 h-screen">
+    <div class="text-center">
+      <h2 class="text-6xl mb-10">Vue transitions</h2>
     </div>
-  </div>
+    <TodoList class="w-1/3 mx-auto" />
+  </section>
 </template>
 
 <script>
 export default {}
 </script>
-
-<style>
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-</style>

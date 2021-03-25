@@ -1,5 +1,7 @@
 # Examples of GSAP animations in Nuxt.js
 
+Few demo examples of using GSAP animations in Vue/Nuxt app. Also a playground for different experiments with animations.
+
 ## Build Setup
 
 ```bash

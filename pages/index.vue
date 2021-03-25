@@ -5,7 +5,7 @@
         <div class="absolute inset-0 flex items-center justify-center">
           <h1 ref="title" class="text-6xl uppercase">GSAP animations</h1>
         </div>
-        <div class="w-full grid grid-auto-flow grid-cols-12 gap-2">
+        <div class="w-full z-10 grid grid-auto-flow grid-cols-12 gap-2">
           <div
             v-for="n in 60"
             ref="circle"
@@ -61,7 +61,16 @@
       </div>
       <h2 ref="long-text" class="long-text">This text is veeeeeeery long...</h2>
     </section>
-    <section ref="bounce-section" class="h-screen pt-24"></section>
+    <section ref="bouncing-section" class="h-screen pt-24 relative">
+      <div class="absolute w-full bottom-0 flex justify-between h-12">
+        <div
+          v-for="n in 16"
+          :key="n"
+          ref="violet-circle"
+          class="rounded-full bg-purple-400 h-12 w-12"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -81,13 +90,14 @@ export default {
     })
 
     const introTimeline = gsap.timeline()
+
     introTimeline
       .to(this.$refs.circle, {
         scale: 0,
         stagger: {
           each: 0.1,
           grid: 'auto',
-          from: `center`,
+          from: 'center',
         },
       })
       .from(
@@ -111,7 +121,7 @@ export default {
       duration: 1.5,
       scrollTrigger: {
         trigger: this.$refs['image-section'],
-        start: 'top center',
+        start: 'top bottom-=300',
       },
     })
 
@@ -152,6 +162,28 @@ export default {
         },
         '-=0.2'
       )
+
+    const bouncingBallsTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: this.$refs['bouncing-section'],
+        start: 'top top+=20',
+      },
+    })
+
+    bouncingBallsTimeline
+      .from(this.$refs['violet-circle'], {
+        opacity: 0,
+        duration: 0.01,
+      })
+      .from(this.$refs['violet-circle'], {
+        y: '-130vh',
+        duration: 2,
+        ease: 'bounce',
+        stagger: {
+          from: 'random',
+          each: 0.2,
+        },
+      })
   },
 }
 </script>
