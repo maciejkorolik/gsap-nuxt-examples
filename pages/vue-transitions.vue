@@ -8,5 +8,29 @@
 </template>
 
 <script>
-export default {}
+import gsap from 'gsap'
+export default {
+  transition: {
+    mode: 'out-in',
+    css: false,
+    beforeEnter(el, done) {
+      gsap.from(el, {
+        y: -100,
+        opacity: 0,
+        filter: 'blur(10px)',
+        duration: 0.5,
+        onComplete: done,
+      })
+    },
+    leave(el, done) {
+      gsap.to(el, {
+        y: -100,
+        opacity: 0,
+        filter: 'blur(10px)',
+        duration: 0.5,
+        onComplete: done,
+      })
+    },
+  },
+}
 </script>

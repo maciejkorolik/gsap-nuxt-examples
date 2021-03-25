@@ -3,7 +3,9 @@
     <section class="h-screen pt-24">
       <div class="relative">
         <div class="absolute inset-0 flex items-center justify-center">
-          <h1 ref="title" class="text-6xl uppercase">GSAP animations</h1>
+          <h1 ref="title" class="text-6xl uppercase opacity-0">
+            GSAP animations
+          </h1>
         </div>
         <div class="w-full z-10 grid grid-auto-flow grid-cols-12 gap-2">
           <div
@@ -62,12 +64,12 @@
       <h2 ref="long-text" class="long-text">This text is veeeeeeery long...</h2>
     </section>
     <section ref="bouncing-section" class="h-screen pt-24 relative">
-      <div class="absolute w-full bottom-0 flex justify-between h-12">
+      <div class="absolute w-full bottom-0 flex justify-between h-16">
         <div
           v-for="n in 16"
           :key="n"
           ref="violet-circle"
-          class="rounded-full bg-purple-400 h-12 w-12"
+          class="rounded-full bg-purple-400 h-16 w-16"
         />
       </div>
     </section>
@@ -82,14 +84,16 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default {
   mounted() {
-    gsap.to(this.$refs.arrow, {
-      y: 3,
-      duration: 0.5,
-      repeat: -1,
-      yoyo: true,
+    const introTimeline = gsap.timeline()
+
+    gsap.set(this.$refs.title, {
+      opacity: 0,
+      filter: 'blur(10px',
     })
 
-    const introTimeline = gsap.timeline()
+    gsap.set(this.$refs.arrow, {
+      opacity: 0,
+    })
 
     introTimeline
       .to(this.$refs.circle, {
@@ -100,18 +104,23 @@ export default {
           from: 'center',
         },
       })
-      .from(
+      .to(
         this.$refs.title,
         {
-          opacity: 0,
-          filter: 'blur(10px)',
+          opacity: 1,
+          filter: 'none',
           duration: 1.1,
         },
         '-=1'
       )
-      .from(this.$refs.arrow, {
-        opacity: 0,
+      .set(this.$refs.arrow, {
+        opacity: 1,
+      })
+      .to(this.$refs.arrow, {
+        y: 3,
         duration: 0.5,
+        repeat: -1,
+        yoyo: true,
       })
 
     gsap.from(this.$refs['image-section'].children, {

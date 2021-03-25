@@ -13,7 +13,7 @@
     <ul>
       <transition-group mode="out-in" @enter="onEnter" @leave="onLeave">
         <li
-          v-for="todo in todos"
+          v-for="(todo, i) in todos"
           :key="todo"
           ref="todo"
           class="w-full bg-orange-200 rounded-xl"
@@ -22,7 +22,7 @@
             <span>{{ todo }}</span>
             <button
               class="h-6 w-6 border border-black border-solid rounded-full focus:outline-none"
-              @click="handleRemoveTodo(todo)"
+              @click="handleRemoveTodo(i)"
             >
               X
             </button>
@@ -62,8 +62,8 @@ export default {
           filter: 'none',
         })
     },
-    handleRemoveTodo(todoToRemove) {
-      this.todos = this.todos.filter((todo) => todo !== todoToRemove)
+    handleRemoveTodo(index) {
+      this.todos.splice(index, 1)
     },
     onEnter(el) {
       gsap.from(el, {
