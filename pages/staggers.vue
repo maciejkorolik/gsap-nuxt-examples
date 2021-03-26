@@ -11,7 +11,7 @@
         >
       </h2>
     </div>
-    <div class="w-3/5 mx-auto grid grid-auto-flow grid-cols-10 gap-4 mb-16">
+    <div class="w-3/5 mx-auto grid grid-auto-flow grid-cols-10 gap-4 mb-32">
       <div
         v-for="(n, i) in 60"
         ref="box"

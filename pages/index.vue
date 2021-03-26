@@ -15,7 +15,10 @@
             class="h-24 bg-purple-400 rounded-full"
           />
         </div>
-        <div ref="arrow" class="absolute bottom-0 w-full text-4xl text-center">
+        <div
+          ref="arrow"
+          class="absolute bottom-0 w-full text-4xl text-center opacity-0"
+        >
           &darr;
         </div>
       </div>
@@ -35,14 +38,14 @@
         </p>
         <img
           class="w-1/2 object-contain p-6"
-          src="~/assets/img/michael.gif"
-          alt="Michael Scott"
+          src="https://source.unsplash.com/random/640x320"
+          alt=""
         />
 
         <img
           class="w-1/2 object-contain p-6"
-          src="~/assets/img/michael2.jpg"
-          alt="Michael Scott"
+          src="https://source.unsplash.com/random/640x320"
+          alt=""
         />
         <p class="w-1/2 p-6">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
@@ -64,6 +67,19 @@
       <h2 ref="long-text" class="long-text">This text is veeeeeeery long...</h2>
     </section>
     <section ref="bouncing-section" class="h-screen pt-24 relative">
+      <svg viewbox="-20 0 557 400" width="100%">
+        <path
+          ref="path"
+          fill="none"
+          d="M5.176,28.888 C74.169,9.928 66.861,67.129 139.898,66.129 181.135,66.129 193.015,28.297 154.728,26.906 95.82,24.765 96.095,60.961 102.776,76.842 121.363,121.062 217.269,102.111 277.368,98.083 387.377,90.709 356.748,251.201 499.06,230.451 "
+        />
+        <g ref="plane">
+          <path
+            fill="#000000"
+            d="M31.543,0.16C31.377,0.053,31.188,0,31,0c-0.193,0-0.387,0.055-0.555,0.168l-30,20  c-0.309,0.205-0.479,0.566-0.439,0.936c0.038,0.369,0.278,0.688,0.623,0.824l7.824,3.131l3.679,6.438  c0.176,0.309,0.503,0.5,0.857,0.504c0.004,0,0.007,0,0.011,0c0.351,0,0.677-0.186,0.857-0.486l2.077-3.463l9.695,3.877  C25.748,31.977,25.873,32,26,32c0.17,0,0.338-0.043,0.49-0.129c0.264-0.148,0.445-0.408,0.496-0.707l5-30  C32.051,0.771,31.877,0.377,31.543,0.16z M3.136,20.777L26.311,5.326L9.461,23.363c-0.089-0.053-0.168-0.123-0.266-0.162  L3.136,20.777z M10.189,24.066c-0.002-0.004-0.005-0.006-0.007-0.01L29.125,3.781L12.976,28.943L10.189,24.066z M25.217,29.609  l-8.541-3.416c-0.203-0.08-0.414-0.107-0.623-0.119L29.205,5.686L25.217,29.609z"
+          />
+        </g>
+      </svg>
       <div class="absolute w-full bottom-0 flex justify-between h-16">
         <div
           v-for="n in 16"
@@ -79,8 +95,9 @@
 <script>
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
 export default {
   mounted() {
@@ -89,10 +106,6 @@ export default {
     gsap.set(this.$refs.title, {
       opacity: 0,
       filter: 'blur(10px',
-    })
-
-    gsap.set(this.$refs.arrow, {
-      opacity: 0,
     })
 
     introTimeline
@@ -130,7 +143,7 @@ export default {
       duration: 1.5,
       scrollTrigger: {
         trigger: this.$refs['image-section'],
-        start: 'top bottom-=300',
+        start: 'top bottom-=200',
       },
     })
 
@@ -152,6 +165,7 @@ export default {
         },
         {
           scale: 8,
+          duration: 1,
         }
       )
       .fromTo(
@@ -161,6 +175,7 @@ export default {
         },
         {
           x: '-200vw',
+          duration: 2,
         },
         '-=0.4'
       )
@@ -168,9 +183,25 @@ export default {
         this.$refs['black-circle'],
         {
           scale: 0.5,
+          duration: 1,
         },
-        '-=0.2'
+        '-=0.4'
       )
+
+    gsap.to(this.$refs.plane, {
+      motionPath: {
+        path: this.$refs.path,
+        align: this.$refs.path,
+        alignOrigin: [0.5, 0.5],
+        autoRotate: 60,
+      },
+      scrollTrigger: {
+        trigger: this.$refs['bouncing-section'],
+        start: 'top center',
+        end: 'top top+=20',
+        scrub: 0.5,
+      },
+    })
 
     const bouncingBallsTimeline = gsap.timeline({
       scrollTrigger: {
