@@ -2,6 +2,8 @@
 
 Few demo examples of using GSAP animations in Vue/Nuxt app. Also a playground for different experiments with animations.
 
+[Live demo](https://gsap-nuxt-examples.netlify.app/)
+
 ## Build Setup
 
 ```bash
